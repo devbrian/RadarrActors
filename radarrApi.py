@@ -8,8 +8,9 @@ def RadarrImdbSearch(api_key, search_imdb):
         payload = {'apikey': api_key}
         my_response = requests.get('http://localhost:7878/api/movies/lookup?term=imdb%3A' + search_imdb, params=payload)
         data = json.loads(my_response.content)
-        first_result = data[0]
-        return first_result
+        if len(data) > 0:
+            first_result = data[0]
+            return first_result
     except requests.exceptions.RequestException as e:
         print(e)
         sys.exit(1)
