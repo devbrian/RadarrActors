@@ -61,16 +61,8 @@ def main():
     movie_ids = tmdbApi.moviesByActorId(api_key, actor_id)
     tmdbApi.addIdsToList(api_key, session_id, movie_ids, list_id)
     list_movie_ids = tmdbApi.getTMDBListDetails(api_key, list_id)
-    counter = 0
-    print("Sleeping for 15 seconds so we don't go over API limit!")
-    time.sleep(15)
-    print("Continuing..")
+
     for movie_id in list_movie_ids:
-        counter += 1
-        if counter % 30 == 0:
-            print("Sleeping for 15 seconds so we don't go over API limit!")
-            time.sleep(15)
-            print("Continuing..")
         imdb_id = tmdbApi.TMDBtoIMDB(api_key, movie_id)
         if imdb_id == '':
             print("Movie was not found on imdb: " + str(movie_id))
